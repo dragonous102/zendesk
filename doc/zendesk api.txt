@@ -1,0 +1,122 @@
+credential:
+==== zendesk account ==========================
+full name: boris markovic
+email: borismarkovicb@outlook.com
+password: ducyfdjwth0103
+website: https://sadalearning.com/
+company: JP Elektroprivreda Srbije
+serbia phone: +381 63 7151442
+sub domain: https://jpelektroprivredasrbije.zendesk.com
+api token: dv5xlgS2c9fEr55l0DoDm3RARUb4gUGdyTqgDmNy
+
+
+minamide's
+https://plusqo.zendesk.com/auth/v2/login/signin
+info@plusqo.ai
+fF23NskUgEzc
+admin center: https://plusqo.zendesk.com/admin/staff/900296790686#account-tab
+
+
+1. create user:
+- duplicate error response
+{
+    "error": "RecordInvalid",
+    "description": "Record validation errors",
+    "details": {
+        "email": [
+            {
+                "description": "メール: <b>ユーザーを更新できませんでした</b><br>このメールアドレスはすでに使用されています。別のメールアドレスでやり直してください。<a href=\"https://support.zendesk.com/hc/ja/articles/4408834337562\">使用されているメールアドレスについて</a>。",
+                "error": "DuplicateValue"
+            }
+        ]
+    }
+}
+
+{
+    "user": {
+        "id": 21552755732249,
+        "url": "https://plusqo.zendesk.com/api/v2/users/21552755732249.json",
+        "name": "boris-12",
+        "email": "borismarkovica+12@outlook.com",
+        "created_at": "2023-08-07T17:53:59Z",
+        "updated_at": "2023-08-07T17:53:59Z",
+        "time_zone": "Osaka",
+        "iana_time_zone": "Asia/Tokyo",
+        "phone": null,
+        "shared_phone_number": null,
+        "photo": null,
+        "locale_id": 1,
+        "locale": "en-US",
+        "organization_id": null,
+        "role": "end-user",
+        "verified": false,
+        "external_id": null,
+        "tags": [],
+        "alias": null,
+        "active": true,
+        "shared": false,
+        "shared_agent": false,
+        "last_login_at": null,
+        "two_factor_auth_enabled": false,
+        "signature": null,
+        "details": null,
+        "notes": null,
+        "role_type": null,
+        "custom_role_id": null,
+        "moderator": false,
+        "ticket_restriction": "requested",
+        "only_private_comments": false,
+        "restricted_agent": true,
+        "suspended": false,
+        "default_group_id": null,
+        "report_csv": false,
+        "user_fields": {
+            "other01": null,
+            "other02": null
+        }
+    }
+}
+
+
+token:
+WMULzOrnwye7Zvmu4zeIzQl65bumQ14tnjnURGeJ
+
+================       There is no login api in zendesk       ===========================================
+Zendesk API does not have a direct login API endpoint. Instead, user authentication is handled through Zendesk's Single Sign-On (SSO) mechanism or by using OAuth or API token-based authentication.
+
+For user authentication in Zendesk, you should implement one of the following approaches:
+
+Single Sign-On (SSO): If you have an existing authentication system and want to enable seamless login to Zendesk without requiring users to enter their credentials again, you can implement Single Sign-On (SSO) with Zendesk. With SSO, you authenticate users through your own system, and then Zendesk trusts the authentication performed by your system. You can use SAML-based SSO or JWT-based SSO with Zendesk. This approach allows users to log in to Zendesk using their existing credentials from your system.
+
+OAuth: If you want to allow third-party applications to access Zendesk on behalf of users, you can use OAuth for user authentication. OAuth allows users to grant permissions to external applications to access their Zendesk data without sharing their credentials directly with the application. This approach is typically used for integrating external applications with Zendesk.
+
+API Token-Based Authentication: If you are building a custom application that needs to interact with the Zendesk API on behalf of users, you can use API token-based authentication. In this approach, users generate API tokens from their Zendesk account, and your application uses those tokens to authenticate API requests.
+
+In summary, there is no direct login API in Zendesk for user authentication. Instead, you should use one of the above approaches depending on your use case and requirements. If you are building a custom application, API token-based authentication might be more suitable. If you have an existing authentication system, you can implement Single Sign-On (SSO) to enable seamless login to Zendesk.
+
+
+jwt authentication work flow:
+When you create a user in Zendesk and use JWT (JSON Web Tokens) for authentication, you don't need to use the user's password for subsequent logins. Instead of using the traditional username/password-based authentication, JWT allows you to authenticate users using a token-based approach.
+
+Here's how the flow works:
+
+User Registration:
+
+When a user registers on your website, you create the user in Zendesk using their details (name, email, etc.) and obtain the Zendesk user ID.
+Generate JWT Token:
+
+After user registration, you generate a JWT token on your backend using the firebase/php-jwt library. The token contains user-related information (e.g., email, name) and other necessary data. The token is signed with a secret key known only to your backend and Zendesk.
+Store JWT Token:
+
+Once the JWT token is generated, you store it in your database alongside other user details, such as name, email, and Zendesk user ID.
+User Login:
+
+When the user logs in again, you can use the stored JWT token for authentication instead of asking for their username and password.
+On the frontend, when the user clicks the login button, your application sends the stored JWT token along with the login request to your backend.
+Authenticate with Zendesk:
+
+On your backend, you verify the JWT token's authenticity and extract user-related information from it.
+Using the extracted information, you can find the corresponding user in Zendesk based on the Zendesk user ID.
+This way, you authenticate the user with Zendesk without requiring their password.
+By using JWT tokens, you eliminate the need to store or handle user passwords on your backend, making the authentication process more secure and streamlined. Instead, the JWT token acts as proof of the user's identity, and Zendesk can verify the token's authenticity using the shared secret key.
+
